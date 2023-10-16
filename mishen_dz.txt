@@ -1,0 +1,36 @@
+#include<iostream>
+#include<ctime>
+#include<cmath>
+
+using namespace std;
+
+int main() {
+    int score;
+
+    srand(time(NULL));
+
+    for (int i = 0; i < 5; i++) { // 5 выстрелов
+        int xi, yi;
+        cout << "Enter the " << (i + 1) << " coordinates " << "1(xi yi)" << endl;
+        cin >> xi >> yi;
+
+        int random_xi = rand() % 11 - 5; // остаток будет максимум 10, а от него уже отнимаем 5
+        int random_yi = rand() % 11 - 5;
+
+        int rad = sqrt(pow((xi + random_xi), 2) + pow((yi + random_yi), 2)); // Радиус считается по формуле
+
+        int point = 5 - rad; // Чем меньше радиус, тем больше очков будет
+
+        if (((point >> 31) & 1)) { // Если point отрицательное, то оно будет иметь установленный старший бит
+            point = 0;
+        };
+        score += point; // К общему счету прибавляются очки
+    }
+    cout << "Your score " << score << endl;
+    if (score > 10) {
+        cout << "You win! Chetko, bro ┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻" << endl;
+    } else {
+        cout << "Loooooosssserrr, kapec)" << endl;
+    }
+    return 0;
+}
